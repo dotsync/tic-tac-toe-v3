@@ -104,34 +104,23 @@ export default class Game {
     return this.rootValues
   }
   miniMax(depth, player) {
-    // if computer wins, +1 for computer
     if (this.isWinning(Constants._computer)) return +1
     if (this.isWinning(Constants._user)) return -1
     const availableCells = this.getEmptyCells();
     if (availableCells.length < 1) return 0
-    // console.log('availableCells', availableCells)
     const scores = [];
     for (let i = 0; i < availableCells.length; i ++) {
       const currentCell = availableCells[i];
-      // console.log('currentCell', currentCell)
       if (player === Constants._computer) {
-        // this.move(currentCell, Constants._computer)
         currentCell.cellState = Constants._computer
         this.board[currentCell.x][currentCell.y] = currentCell
-        console.log('boarddd', this.board)
         const currentScore = this.miniMax(depth+1, Constants._user)
-
-        console.log('currentScore', currentScore)
-  
-        
         scores.push(currentScore);
         if (depth === 0) {
-          console.log('depth=0, cell:', currentCell )
           currentCell.miniMax = currentScore
           this.rootValues.push(currentCell)
         }
       } else if (player === Constants._user) {
-        // this.move(currentCell, Constants._user)
         currentCell.cellState = Constants._user
         this.board[currentCell.x][currentCell.y] = currentCell
         const currentScore = this.miniMax(depth+1, Constants._computer)

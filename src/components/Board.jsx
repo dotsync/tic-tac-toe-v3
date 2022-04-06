@@ -11,42 +11,30 @@ export default function Board({ board, setBoard, game }) {
 
   useEffect(() => {
     if (isComputerMove) {
-      // try find valid move
-      const [x, y] = game.randomMove()
       try {
         setTimeout(() => {
-          // const newCell = new Cell(x, y, Constants._computer)
-          // const updatedGameBoard = board
-          // updatedGameBoard[x][y] = newCell
-          // setBoard([...updatedGameBoard])
-          // game.move(newCell, Constants._computer)
-          
           const moveOptions = game.callMiniMax(0, Constants._computer)
           console.log('moveOptions', moveOptions)
           // iterate options to find cell with greatest minimax val
-          let bestMoveMiniMaxVal = -1
+          let bestMoveMiniMaxVal = -2
           let bestMoveCell
           moveOptions.forEach((option) => {
-            // console.log('option minimax value:', option.miniMax)
             if (option.miniMax > bestMoveMiniMaxVal) {
               bestMoveMiniMaxVal = option.miniMax
               bestMoveCell = option
             }
           })
+          let x, y
           if (bestMoveMiniMaxVal === -1) {
-            const [x, y] = game.randomMove()
-            console.log('no good move, pick random move', x, y)
+            [x, y] = game.randomMove()
 
           } else {
-            const [x, y] = [bestMoveCell.x, bestMoveCell.y]
-            console.log('bestmove', x, y, 'score', bestMoveMiniMaxVal)
+            [x, y] = [bestMoveCell.x, bestMoveCell.y]
           }
-
-
+          
           const newCell = new Cell(x, y, Constants._computer)
           const updatedGameBoard = board
           updatedGameBoard[x][y] = newCell
-          console.log('newCell', newCell)
           setBoard([...updatedGameBoard])
           game.move(newCell, Constants._computer)
 
