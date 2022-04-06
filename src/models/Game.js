@@ -1,4 +1,3 @@
-import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers'
 import Cell from './Cell'
 import { Constants } from './Constants'
 

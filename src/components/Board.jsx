@@ -10,6 +10,8 @@ export default function Board({ board, setBoard, game }) {
   const [isComputerMove, setIsComputerMove] = useState(true)
   const [playerTurn, setPlayerTurn] = useState('')
 
+
+  const firstMove = Constants._computer
   useEffect(() => {
     if (isComputerMove) {
       setPlayerTurn('Waiting for computer to move')
@@ -51,14 +53,12 @@ export default function Board({ board, setBoard, game }) {
           if (game.getEmptyCells().length < 1  && !game.isWinning(Constants._computer) && !game.isWinning(Constants._user)) {
             game.displayBoard()
             setHasWinner('Draw!')
-            setIsComputerMove(false)
+            setIsComputerMove(true)
             setIsPlayerMove(false)
             setPlayerTurn('New Game?')
           } else if (game.isWinning(Constants._computer)) {
             setHasWinner('Computer Wins!')
-            setIsComputerMove(false)
-            setIsPlayerMove(false)
-            setPlayerTurn('New Game?')
+            setPlayerTurn('Waiting for user to move')
           } else {
             // swap turns
             setIsComputerMove(false)
@@ -71,6 +71,20 @@ export default function Board({ board, setBoard, game }) {
       }
     }
   }, [isPlayerMove])
+
+  const startNewGame = () => {
+    game.initializeBoard()
+    const mockboardWithCells = game.board;
+    setBoard([...mockboardWithCells])
+    if (firstMove === Constants._computer) {
+      setIsComputerMove(true)
+      setIsPlayerMove(false)
+    } else if (firstMove === Constants._user) {
+      setIsComputerMove(false)
+      setIsPlayerMove(true)
+    }
+    setHasWinner('')
+  }
 
   return (
     <div className="gameboard">
@@ -109,6 +123,7 @@ export default function Board({ board, setBoard, game }) {
           </div>
         )
       })}
+      {/* <button onClick={startNewGame}>restart</button> */}
     </div>
   )
 }
