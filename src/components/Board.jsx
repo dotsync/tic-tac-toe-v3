@@ -14,15 +14,16 @@ export default function Board({ board, setBoard, game }) {
       try {
         setTimeout(() => {
           const moveOptions = game.callMiniMax(0, Constants._computer)
-          console.log('moveOptions', moveOptions)
-          // iterate options to find cell with greatest minimax val
           let bestMoveMiniMaxVal = -2
           let bestMoveCell
           // for random first move
           let x, y
           if (moveOptions.length === 9) {
+            console.log('New game started! Computer making random move...');
             [x, y] = game.randomMove()
           } else {
+            // iterate options to find cell with greatest minimax val
+            console.log('moveOptions', moveOptions)
             moveOptions.forEach((option) => {
               if (option.miniMax > bestMoveMiniMaxVal) {
                 bestMoveMiniMaxVal = option.miniMax
@@ -35,18 +36,6 @@ export default function Board({ board, setBoard, game }) {
               [x, y] = [bestMoveCell.x, bestMoveCell.y]
             }
           }
-          // moveOptions.forEach((option) => {
-          //   if (option.miniMax > bestMoveMiniMaxVal) {
-          //     bestMoveMiniMaxVal = option.miniMax
-          //     bestMoveCell = option
-          //   }
-          // })
-          // if (bestMoveMiniMaxVal === -1) {
-          //   [x, y] = game.randomMove()
-
-          // } else {
-          //   [x, y] = [bestMoveCell.x, bestMoveCell.y]
-          // }
           
           const newCell = new Cell(x, y, Constants._computer)
           const updatedGameBoard = board
@@ -66,6 +55,7 @@ export default function Board({ board, setBoard, game }) {
             // swap turns
             setIsComputerMove(false)
             setIsPlayerMove(true)
+            console.log('Waiting for user to move...')
           }
         }, Math.floor(Math.random() * 750 + 500))
       } catch (e) {
@@ -74,9 +64,12 @@ export default function Board({ board, setBoard, game }) {
     }
   }, [isPlayerMove])
 
-
+const tte = true
   return (
     <div className="gameboard">
+      {hasWinner && (
+        <h1>{hasWinner} wins!</h1>
+      )}
       {board.map((row, rowIdx) => {
         return (
           <div className="row" key={'row' + rowIdx}>
