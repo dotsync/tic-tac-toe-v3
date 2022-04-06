@@ -11,6 +11,7 @@ export default class Game {
     this.initializeBoard()
   }
   initializeBoard() {
+    this.board = [[], [], []]
     for (let i = 0; i < Constants._boardSize; i++) {
       for (let j = 0; j < Constants._boardSize; j++) {
         const newCell = new Cell(i, j, Constants._empty)

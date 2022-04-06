@@ -12,6 +12,12 @@ function App() {
   return (
     <div className="App">
       <h1>tic-tac-toe-v3</h1>
+      <button onClick={() => {
+        game.initializeBoard()
+        mockboardWithCells = game.board;
+        console.log('mockboardWithCells', mockboardWithCells)
+        setBoard([...mockboardWithCells])
+        }}>restart</button>
       <Board
         game={game}
         board={board}
