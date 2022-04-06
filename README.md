@@ -125,7 +125,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 - [ ] When a win is detected, outline the winning cells in like a bubble (CSS)
 - [ ] When a loss is detected, make some sort of CSS animation, like fade to "failure" page, "retry?"
-- [ ] BUG - User is able to click computers most recent move and change the cellState
+- [x] BUG - User is able to click computers most recent move and change the cellState
     - [ ] Nested Feature
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).

@@ -9,7 +9,7 @@ export default function CellComponent({
 }) {
 
   const handleClick = () => {
-    if (isPlayerMove) {
+    if (isPlayerMove && board[rowIdx][colIdx]['cellState'] === Constants._empty) {
       try {
         const newCell = new Cell(rowIdx, colIdx, Constants._user)
         const updatedGameBoard = board
