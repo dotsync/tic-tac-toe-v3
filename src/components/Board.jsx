@@ -6,8 +6,8 @@ import Cell from '../models/Cell'
 
 export default function Board({ board, setBoard, game }) {
   const [hasWinner, setHasWinner] = useState('')
-  const [isPlayerMove, setIsPlayerMove] = useState(true)
-  const [isComputerMove, setIsComputerMove] = useState(false)
+  const [isPlayerMove, setIsPlayerMove] = useState(false)
+  const [isComputerMove, setIsComputerMove] = useState(true)
 
   useEffect(() => {
     if (isComputerMove) {
@@ -18,19 +18,35 @@ export default function Board({ board, setBoard, game }) {
           // iterate options to find cell with greatest minimax val
           let bestMoveMiniMaxVal = -2
           let bestMoveCell
-          moveOptions.forEach((option) => {
-            if (option.miniMax > bestMoveMiniMaxVal) {
-              bestMoveMiniMaxVal = option.miniMax
-              bestMoveCell = option
-            }
-          })
+          // for random first move
           let x, y
-          if (bestMoveMiniMaxVal === -1) {
+          if (moveOptions.length === 9) {
             [x, y] = game.randomMove()
-
           } else {
-            [x, y] = [bestMoveCell.x, bestMoveCell.y]
+            moveOptions.forEach((option) => {
+              if (option.miniMax > bestMoveMiniMaxVal) {
+                bestMoveMiniMaxVal = option.miniMax
+                bestMoveCell = option
+              }
+            })
+            if (bestMoveMiniMaxVal === -1) {
+              [x, y] = game.randomMove()
+            } else {
+              [x, y] = [bestMoveCell.x, bestMoveCell.y]
+            }
           }
+          // moveOptions.forEach((option) => {
+          //   if (option.miniMax > bestMoveMiniMaxVal) {
+          //     bestMoveMiniMaxVal = option.miniMax
+          //     bestMoveCell = option
+          //   }
+          // })
+          // if (bestMoveMiniMaxVal === -1) {
+          //   [x, y] = game.randomMove()
+
+          // } else {
+          //   [x, y] = [bestMoveCell.x, bestMoveCell.y]
+          // }
           
           const newCell = new Cell(x, y, Constants._computer)
           const updatedGameBoard = board
