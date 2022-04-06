@@ -63,11 +63,12 @@ export default function Board({ board, setBoard, game }) {
     <div className="gameboard">
       {board.map((row, rowIdx) => {
         return (
-          <div className="row">
+          <div className="row" key={'row' + rowIdx}>
             {row.map((cell, colIdx) => {
               const divLocator = 'loc' + rowIdx + colIdx
               return (
                 <CellComponent
+                  key={'col' + colIdx}
                   className={divLocator}
                   rowIdx={rowIdx}
                   colIdx={colIdx}
