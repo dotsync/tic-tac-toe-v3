@@ -4,7 +4,7 @@ import Cell from '../models/Cell'
 
 export default function CellComponent({
   board, setBoard, cellState, game,
-  rowIdx, colIdx, isPlayerMove,
+  rowIdx, colIdx, isPlayerMove, setPlayerTurn,
   setIsPlayerMove, setIsComputerMove, setHasWinner
 }) {
 
@@ -22,6 +22,7 @@ export default function CellComponent({
           console.log('Draw!')
           setIsComputerMove(false)
           setIsPlayerMove(false)
+          setPlayerTurn('New Game?')
         }
         else if (game.isWinning(Constants._user)) {
           game.displayBoard()
@@ -29,6 +30,7 @@ export default function CellComponent({
           console.log('Player wins!')
           setIsComputerMove(true)
           setIsPlayerMove(false)
+          setPlayerTurn('New Game?')
         } else {
           // set player move false and comp true
           setIsPlayerMove(false)

@@ -8,9 +8,11 @@ export default function Board({ board, setBoard, game }) {
   const [hasWinner, setHasWinner] = useState('')
   const [isPlayerMove, setIsPlayerMove] = useState(false)
   const [isComputerMove, setIsComputerMove] = useState(true)
+  const [playerTurn, setPlayerTurn] = useState('')
 
   useEffect(() => {
     if (isComputerMove) {
+      setPlayerTurn('Waiting for computer to move')
       try {
         setTimeout(() => {
           const moveOptions = game.callMiniMax(0, Constants._computer)
@@ -52,16 +54,19 @@ export default function Board({ board, setBoard, game }) {
             console.log('Draw!')
             setIsComputerMove(false)
             setIsPlayerMove(false)
+            setPlayerTurn('New Game?')
           }
            else if (game.isWinning(Constants._computer)) {
             setHasWinner('Computer Wins!')
             console.log('Computer wins!')
             setIsComputerMove(false)
             setIsPlayerMove(false)
+            setPlayerTurn('New Game?')
           } else {
             // swap turns
             setIsComputerMove(false)
             setIsPlayerMove(true)
+            setPlayerTurn('Waiting for user to move')
             console.log('Waiting for user to move...')
           }
         }, Math.floor(Math.random() * 750 + 500))
@@ -74,9 +79,10 @@ export default function Board({ board, setBoard, game }) {
 const tte = true
   return (
     <div className="gameboard">
-      {hasWinner && (
-        <h1>{hasWinner}</h1>
-      )}
+      {hasWinner ? 
+        <h1>{hasWinner}</h1> :
+        <h1>{playerTurn}</h1>
+      }
       {board.map((row, rowIdx) => {
         return (
           <div className="row" key={'row' + rowIdx}>
@@ -98,6 +104,7 @@ const tte = true
                   isComputerMove={isComputerMove}
                   hasWinner={hasWinner}
                   setHasWinner={setHasWinner}
+                  setPlayerTurn={setPlayerTurn}
                 />
               )
             })}
