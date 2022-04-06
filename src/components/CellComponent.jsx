@@ -16,9 +16,16 @@ export default function CellComponent({
         updatedGameBoard[rowIdx][colIdx] = newCell
         setBoard([...updatedGameBoard])
         game.move(newCell, Constants._user)
-        if (game.isWinning(Constants._user)) {
+        if (game.getEmptyCells().length < 1) {
           game.displayBoard()
-          setHasWinner('Player')
+          setHasWinner('Draw')
+          console.log('Draw!')
+          setIsComputerMove(false)
+          setIsPlayerMove(false)
+        }
+        else if (game.isWinning(Constants._user)) {
+          game.displayBoard()
+          setHasWinner('Player Wins!')
           console.log('Player wins!')
           setIsComputerMove(true)
           setIsPlayerMove(false)

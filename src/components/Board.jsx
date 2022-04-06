@@ -46,8 +46,15 @@ export default function Board({ board, setBoard, game }) {
           game.displayBoard()
 
           // check for win
-          if (game.isWinning(Constants._computer)) {
-            setHasWinner('Computer')
+          if (game.getEmptyCells().length < 1) {
+            game.displayBoard()
+            setHasWinner('Draw!')
+            console.log('Draw!')
+            setIsComputerMove(false)
+            setIsPlayerMove(false)
+          }
+           else if (game.isWinning(Constants._computer)) {
+            setHasWinner('Computer Wins!')
             console.log('Computer wins!')
             setIsComputerMove(false)
             setIsPlayerMove(false)
@@ -68,7 +75,7 @@ const tte = true
   return (
     <div className="gameboard">
       {hasWinner && (
-        <h1>{hasWinner} wins!</h1>
+        <h1>{hasWinner}</h1>
       )}
       {board.map((row, rowIdx) => {
         return (
