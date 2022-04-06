@@ -21,8 +21,8 @@ export default function Board({ board, setBoard, game }) {
           // for random first move
           let x, y
           if (moveOptions.length === 9) {
-            console.log('New game started! Computer making random move...');
-            [x, y] = game.randomMove()
+            console.log('New game started! Computer making random move...')
+            ;[x, y] = game.randomMove()
           } else {
             // iterate options to find cell with greatest minimax val
             console.log('moveOptions', moveOptions)
@@ -33,12 +33,12 @@ export default function Board({ board, setBoard, game }) {
               }
             })
             if (bestMoveMiniMaxVal === -1) {
-              [x, y] = game.randomMove()
+              ;[x, y] = game.randomMove()
             } else {
-              [x, y] = [bestMoveCell.x, bestMoveCell.y]
+              ;[x, y] = [bestMoveCell.x, bestMoveCell.y]
             }
           }
-          
+
           const newCell = new Cell(x, y, Constants._computer)
           const updatedGameBoard = board
           updatedGameBoard[x][y] = newCell
@@ -48,17 +48,14 @@ export default function Board({ board, setBoard, game }) {
           game.displayBoard()
 
           // check for win
-          if (game.getEmptyCells().length < 1) {
+          if (game.getEmptyCells().length < 1  && !game.isWinning(Constants._computer) && !game.isWinning(Constants._user)) {
             game.displayBoard()
             setHasWinner('Draw!')
-            console.log('Draw!')
             setIsComputerMove(false)
             setIsPlayerMove(false)
             setPlayerTurn('New Game?')
-          }
-           else if (game.isWinning(Constants._computer)) {
+          } else if (game.isWinning(Constants._computer)) {
             setHasWinner('Computer Wins!')
-            console.log('Computer wins!')
             setIsComputerMove(false)
             setIsPlayerMove(false)
             setPlayerTurn('New Game?')
@@ -67,7 +64,6 @@ export default function Board({ board, setBoard, game }) {
             setIsComputerMove(false)
             setIsPlayerMove(true)
             setPlayerTurn('Waiting for user to move')
-            console.log('Waiting for user to move...')
           }
         }, Math.floor(Math.random() * 750 + 500))
       } catch (e) {
@@ -76,13 +72,15 @@ export default function Board({ board, setBoard, game }) {
     }
   }, [isPlayerMove])
 
-const tte = true
   return (
     <div className="gameboard">
-      {hasWinner ? 
-        <h1>{hasWinner}</h1> :
+      {hasWinner ? (
+        <>
+          <h1>{hasWinner}</h1>
+        </>
+      ) : (
         <h1>{playerTurn}</h1>
-      }
+      )}
       {board.map((row, rowIdx) => {
         return (
           <div className="row" key={'row' + rowIdx}>

@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import './App.css';
 import Board from './components/Board';
-import { Constants } from './models/Constants';
 import Game from './models/Game';
 
 function App() {
-  const [game, setGame] = useState(new Game())
-  const mockboardWithCells = game.board
-  const [board, setBoard] = useState([...mockboardWithCells])
-
-
-  // const testGame = new Game();
-  // const testBoard = testGame.board
-  // console.log('testBoard', testBoard)
-  // // console.log('empty cells', game.getEmptyCells())
-  // console.log(testGame.callMiniMax(0, Constants._computer))
+  const [game, setGame] = useState(new Game());
+  let mockboardWithCells = game.board;
+  const [board, setBoard] = useState([...mockboardWithCells]);
 
 
   return (
