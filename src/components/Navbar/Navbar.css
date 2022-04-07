@@ -1,0 +1,11 @@
+.navbar {
+  background-color: #fdfeff;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  padding-left: 30px;
+  border-bottom: 2px solid burlywood;
+  border-right: 2px solid burlywood;
+}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './TicTacToe.css'
 import CellComponent from './CellComponent'
-import { Constants } from '../../models/Constants'
-import Cell from '../../models/Cell'
+import { Constants } from '../../models/tic-tac-toe-models/Constants'
+import Cell from '../../models/tic-tac-toe-models/Cell'
 
 export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn }) {
   const [hasWinner, setHasWinner] = useState('')
@@ -83,8 +83,6 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
 
   return (
     <div className="gameboard">
-      <h1>{playerTurn} </h1>
-      <button onClick={changeStartingPlayer}>change who starts</button>
       {hasWinner ? (
         <>
           <h1>{hasWinner}</h1>
@@ -123,6 +121,7 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
         )
       })}
       <button onClick={startNewGame}>restart</button>
+      <button onClick={changeStartingPlayer}>Player({playerTurn})'s turn</button>
     </div>
   )
 }

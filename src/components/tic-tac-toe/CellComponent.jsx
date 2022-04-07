@@ -1,6 +1,6 @@
 import React from 'react'
-import { Constants } from '../../models/Constants'
-import Cell from '../../models/Cell'
+import { Constants } from '../../models/tic-tac-toe-models/Constants'
+import Cell from '../../models/tic-tac-toe-models/Cell'
 
 export default function CellComponent({
   board, setBoard, cellState, game,

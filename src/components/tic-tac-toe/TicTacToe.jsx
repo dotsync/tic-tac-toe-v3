@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './TicTacToe.css';
 import Board from './Board';
-import Game from '../../models/Game';
-import { Constants } from '../../models/Constants';
+import Game from '../../models/tic-tac-toe-models/Game';
+import { Constants } from '../../models/tic-tac-toe-models/Constants';
 
 function TicTacToe() {
   const [game, setGame] = useState(new Game());
@@ -12,7 +12,6 @@ function TicTacToe() {
 
   return (
     <div className="tic-tac-toe">
-      <h1>tic-tac-toe-v3</h1>
       <Board
         playerTurn={playerTurn}
         setPlayerTurn={setPlayerTurn}
