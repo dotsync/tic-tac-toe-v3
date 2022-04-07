@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './Board.css'
+import './TicTacToe.css'
 import CellComponent from './CellComponent'
 import { Constants } from '../../models/Constants'
 import Cell from '../../models/Cell'
