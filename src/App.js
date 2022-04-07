@@ -1,21 +1,20 @@
-import { useState } from 'react';
 import './App.css';
-import Board from './components/Board';
-import Game from './models/Game';
+import TicTacToe from './components/tic-tac-toe/TicTacToe';
 
 function App() {
-  const [game, setGame] = useState(new Game());
-  let mockboardWithCells = game.board;
-  const [board, setBoard] = useState([...mockboardWithCells]);
+  // const [game, setGame] = useState(new Game());
+  // let mockboardWithCells = game.board;
+  // const [board, setBoard] = useState([...mockboardWithCells]);
 
   return (
     <div className="App">
-      <h1>tic-tac-toe-v3</h1>
+      {/* <h1>tic-tac-toe-v3</h1>
       <Board
         game={game}
         board={board}
         setBoard={setBoard}
-      />
+      /> */}
+      <TicTacToe />
     </div>
   );
 }

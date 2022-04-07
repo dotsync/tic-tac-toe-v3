@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './Board.css'
 import CellComponent from './CellComponent'
-import { Constants } from '../models/Constants'
-import Cell from '../models/Cell'
+import { Constants } from '../../models/Constants'
+import Cell from '../../models/Cell'
 
 export default function Board({ board, setBoard, game }) {
   const [hasWinner, setHasWinner] = useState('')
