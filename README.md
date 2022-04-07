@@ -128,7 +128,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Allow computer to make random first move
 - [ ] BUG - when computer makes last move, which is a winning move, then the game still reports a draw, because i think it is checking length of no more moves and determining a win
 - [x] BUG - User is able to click computers most recent move and change the cellState
-- [x] Check boxes for picking whos turn
+- [ ] Check boxes for picking whos turn
+- [ ] Create an about section which explains the mini max algorithm
+- [ ] use grid to format app layout
     - [ ] Nested Feature
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).

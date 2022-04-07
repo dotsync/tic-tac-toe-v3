@@ -20,13 +20,13 @@ export default function CellComponent({
         // if no more moves and did not win, game is a draw
         if (game.getEmptyCells().length < 1 && !game.isWinning(Constants._user) && !game.isWinning(Constants._user)) {
           setHasWinner('Draw')
-          setPlayerTurn('')
+          // setPlayerTurn('')
           setTitle('New Game?')
         }
         // if user wins
         else if (game.isWinning(Constants._user)) {
           setHasWinner('Player Wins!')
-          setPlayerTurn('')
+          // setPlayerTurn('')
           setTitle('New Game?')
         } else {
           // swap turns

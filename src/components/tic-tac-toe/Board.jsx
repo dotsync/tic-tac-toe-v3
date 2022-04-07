@@ -10,7 +10,7 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
 
   useEffect(() => {
     if (playerTurn === Constants._computer) {
-      setTitle('Waiting for computer to move')
+      setTitle('Waiting for minimax')
       try {
         setTimeout(() => {
           const moveOptions = game.callMiniMax(0, Constants._computer)
@@ -19,7 +19,6 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
           // for random first move
           let x, y
           if (moveOptions.length === 9) {
-            console.log('New game started! Computer making random move...')
             ;[x, y] = game.randomMove()
           } else {
             // iterate options to find cell with greatest minimax val
@@ -46,16 +45,16 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
           // check for win
           if (game.getEmptyCells().length < 1  && !game.isWinning(Constants._computer) && !game.isWinning(Constants._user)) {
             setHasWinner('Draw!')
-            setPlayerTurn('')
+            // setPlayerTurn('')
             setTitle('New Game?')
           } else if (game.isWinning(Constants._computer)) {
             setHasWinner('Computer Wins!')
-            setPlayerTurn('')
-            setTitle('Waiting for user to move')
+            // setPlayerTurn('')
+            setTitle('Waiting for user')
           } else {
             // swap turns
             setPlayerTurn(Constants._user)
-            setTitle('Waiting for user to move')
+            setTitle('Waiting for user')
           }
         }, Math.floor(Math.random() * 500 + 300))
       } catch (e) {

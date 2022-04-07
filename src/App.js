@@ -1,7 +1,7 @@
-import './App.css';
-import TicTacToe from './components/tic-tac-toe/TicTacToe';
-import NavBar from './components/Navbar/Navbar';
-import LearnTemplatePage from './components/LearnTemplatePage';
+import './App.css'
+import TicTacToe from './components/tic-tac-toe/TicTacToe'
+import NavBar from './components/Navbar/Navbar'
+import LearnTemplatePage from './components/LearnTemplatePage'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <TicTacToe />
       {/* <LearnTemplatePage /> */}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
