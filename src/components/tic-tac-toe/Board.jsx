@@ -120,8 +120,10 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
           </div>
         )
       })}
+      <div className='board-btns'>
       <button onClick={startNewGame}>restart</button>
       <button onClick={changeStartingPlayer}>Player({playerTurn})'s turn</button>
+      </div>
     </div>
   )
 }

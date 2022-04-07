@@ -40,7 +40,7 @@ export default function CellComponent({
   
   return (
     <button onClick={handleClick} className="cell">
-      {cellState}
+      <>{cellState}</>
     </button>
   )
 }
