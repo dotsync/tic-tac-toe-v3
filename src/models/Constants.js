@@ -1,5 +1,5 @@
 const Constants = {
-    _empty: '-',
+    _empty: '_',
     _computer: 'O',
     _user: 'X',
     _boardSize: 3

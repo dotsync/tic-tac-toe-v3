@@ -66,15 +66,25 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
 
   const startNewGame = () => {
     setHasWinner('')
+    // reinitilize the instance board
     game.initializeBoard()
     const mockboardWithCells = game.board;
     setBoard([...mockboardWithCells])
-    setPlayerTurn(Constants._computer)
 
+  }
+
+  const changeStartingPlayer = () => {
+    if (playerTurn === Constants._computer) {
+      setPlayerTurn(Constants._user)
+    } else {
+      setPlayerTurn(Constants._computer)
+    }
   }
 
   return (
     <div className="gameboard">
+      <h1>{playerTurn} </h1>
+      <button onClick={changeStartingPlayer}>change who starts</button>
       {hasWinner ? (
         <>
           <h1>{hasWinner}</h1>
