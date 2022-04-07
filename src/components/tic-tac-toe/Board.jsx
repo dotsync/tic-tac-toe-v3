@@ -6,10 +6,7 @@ import Cell from '../../models/Cell'
 
 export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn }) {
   const [hasWinner, setHasWinner] = useState('')
-  // const [isPlayerMove, setIsPlayerMove] = useState(false)
-  // const [isComputerMove, setIsComputerMove] = useState(true)
   const [title, setTitle] = useState('')
-  // const [playerTurn, setPlayerTurn] = useState('')
 
   useEffect(() => {
     if (playerTurn === Constants._computer) {
@@ -39,20 +36,16 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
             }
           }
 
+          // update state and instance
           const newCell = new Cell(x, y, Constants._computer)
           const updatedGameBoard = board
           updatedGameBoard[x][y] = newCell
           setBoard([...updatedGameBoard])
           game.move(newCell, Constants._computer)
 
-          game.displayBoard()
-
           // check for win
           if (game.getEmptyCells().length < 1  && !game.isWinning(Constants._computer) && !game.isWinning(Constants._user)) {
-            game.displayBoard()
             setHasWinner('Draw!')
-            // setIsComputerMove(true)
-            // setIsPlayerMove(false)
             setPlayerTurn('')
             setTitle('New Game?')
           } else if (game.isWinning(Constants._computer)) {
@@ -61,12 +54,10 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
             setTitle('Waiting for user to move')
           } else {
             // swap turns
-            // setIsComputerMove(false)
-            // setIsPlayerMove(true)
             setPlayerTurn(Constants._user)
             setTitle('Waiting for user to move')
           }
-        }, Math.floor(Math.random() * 750 + 500))
+        }, Math.floor(Math.random() * 500 + 300))
       } catch (e) {
         console.log(e)
       }
@@ -78,13 +69,6 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
     game.initializeBoard()
     const mockboardWithCells = game.board;
     setBoard([...mockboardWithCells])
-    // if (playerTurn === Constants._computer) {
-    //   setIsComputerMove(true)
-    //   setIsPlayerMove(false)
-    // } else if (playerTurn === Constants._user) {
-    //   setIsComputerMove(false)
-    //   setIsPlayerMove(true)
-    // }
     setPlayerTurn(Constants._computer)
 
   }
@@ -96,7 +80,7 @@ export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn
           <h1>{hasWinner}</h1>
         </>
       ) : (
-        <h1>{playerTurn}</h1>
+        <h1>{title}</h1>
       )}
       {board.map((row, rowIdx) => {
         return (

@@ -11,32 +11,25 @@ export default function CellComponent({
   const handleClick = () => {
     if (playerTurn === Constants._user && board[rowIdx][colIdx]['cellState'] === Constants._empty) {
       try {
+        // update state and instance
         const newCell = new Cell(rowIdx, colIdx, Constants._user)
         const updatedGameBoard = board
         updatedGameBoard[rowIdx][colIdx] = newCell
         setBoard([...updatedGameBoard])
         game.move(newCell, Constants._user)
-        if (game.getEmptyCells().length < 1) {
-          game.displayBoard()
+        // if no more moves and did not win, game is a draw
+        if (game.getEmptyCells().length < 1 && !game.isWinning(Constants._user) && !game.isWinning(Constants._user)) {
           setHasWinner('Draw')
-          // console.log('Draw!')
-          // setIsComputerMove(false)
-          // setIsPlayerMove(false)
           setPlayerTurn('')
           setTitle('New Game?')
         }
+        // if user wins
         else if (game.isWinning(Constants._user)) {
-          game.displayBoard()
           setHasWinner('Player Wins!')
-          // console.log('Player wins!')
-          // setIsComputerMove(true)
-          // setIsPlayerMove(false)
           setPlayerTurn('')
           setTitle('New Game?')
         } else {
-          // set player move false and comp true
-          // setIsPlayerMove(false)
-          // setIsComputerMove(true)
+          // swap turns
           setPlayerTurn(Constants._computer)
         }
       } catch (e) {
