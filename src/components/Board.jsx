@@ -27,7 +27,6 @@ export default function Board({ board, setBoard, game }) {
             ;[x, y] = game.randomMove()
           } else {
             // iterate options to find cell with greatest minimax val
-            console.log('moveOptions', moveOptions)
             moveOptions.forEach((option) => {
               if (option.miniMax > bestMoveMiniMaxVal) {
                 bestMoveMiniMaxVal = option.miniMax
@@ -77,7 +76,6 @@ export default function Board({ board, setBoard, game }) {
     game.initializeBoard()
     const mockboardWithCells = game.board;
     setBoard([...mockboardWithCells])
-    console.log(game)
     if (firstMove === Constants._computer) {
       setIsComputerMove(true)
       setIsPlayerMove(false)
