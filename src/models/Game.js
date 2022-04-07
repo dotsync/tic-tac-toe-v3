@@ -4,13 +4,14 @@ import { Constants } from './Constants'
 export default class Game {
   constructor() {
     this.board = [[], [], []]
-    this.testBoard = [[], [], []]
     this.emptyCells = []
     this.rootValues = []
     this.initializeBoard()
   }
   initializeBoard() {
     this.board = [[], [], []]
+    this.rootValues = []
+    this.emptyCells = []
     for (let i = 0; i < Constants._boardSize; i++) {
       for (let j = 0; j < Constants._boardSize; j++) {
         const newCell = new Cell(i, j, Constants._empty)

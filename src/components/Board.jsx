@@ -70,12 +70,14 @@ export default function Board({ board, setBoard, game }) {
         console.log(e)
       }
     }
-  }, [isPlayerMove])
+  }, [board])
 
   const startNewGame = () => {
+    setHasWinner('')
     game.initializeBoard()
     const mockboardWithCells = game.board;
     setBoard([...mockboardWithCells])
+    console.log(game)
     if (firstMove === Constants._computer) {
       setIsComputerMove(true)
       setIsPlayerMove(false)
@@ -83,7 +85,7 @@ export default function Board({ board, setBoard, game }) {
       setIsComputerMove(false)
       setIsPlayerMove(true)
     }
-    setHasWinner('')
+
   }
 
   return (
@@ -123,7 +125,7 @@ export default function Board({ board, setBoard, game }) {
           </div>
         )
       })}
-      {/* <button onClick={startNewGame}>restart</button> */}
+      <button onClick={startNewGame}>restart</button>
     </div>
   )
 }
