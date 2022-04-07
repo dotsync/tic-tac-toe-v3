@@ -4,17 +4,16 @@ import CellComponent from './CellComponent'
 import { Constants } from '../../models/Constants'
 import Cell from '../../models/Cell'
 
-export default function Board({ board, setBoard, game }) {
+export default function Board({ board, setBoard, game, playerTurn, setPlayerTurn }) {
   const [hasWinner, setHasWinner] = useState('')
-  const [isPlayerMove, setIsPlayerMove] = useState(false)
-  const [isComputerMove, setIsComputerMove] = useState(true)
-  const [playerTurn, setPlayerTurn] = useState('')
+  // const [isPlayerMove, setIsPlayerMove] = useState(false)
+  // const [isComputerMove, setIsComputerMove] = useState(true)
+  const [title, setTitle] = useState('')
+  // const [playerTurn, setPlayerTurn] = useState('')
 
-
-  const firstMove = Constants._computer
   useEffect(() => {
-    if (isComputerMove) {
-      setPlayerTurn('Waiting for computer to move')
+    if (playerTurn === Constants._computer) {
+      setTitle('Waiting for computer to move')
       try {
         setTimeout(() => {
           const moveOptions = game.callMiniMax(0, Constants._computer)
@@ -52,17 +51,20 @@ export default function Board({ board, setBoard, game }) {
           if (game.getEmptyCells().length < 1  && !game.isWinning(Constants._computer) && !game.isWinning(Constants._user)) {
             game.displayBoard()
             setHasWinner('Draw!')
-            setIsComputerMove(true)
-            setIsPlayerMove(false)
-            setPlayerTurn('New Game?')
+            // setIsComputerMove(true)
+            // setIsPlayerMove(false)
+            setPlayerTurn('')
+            setTitle('New Game?')
           } else if (game.isWinning(Constants._computer)) {
             setHasWinner('Computer Wins!')
-            setPlayerTurn('Waiting for user to move')
+            setPlayerTurn('')
+            setTitle('Waiting for user to move')
           } else {
             // swap turns
-            setIsComputerMove(false)
-            setIsPlayerMove(true)
-            setPlayerTurn('Waiting for user to move')
+            // setIsComputerMove(false)
+            // setIsPlayerMove(true)
+            setPlayerTurn(Constants._user)
+            setTitle('Waiting for user to move')
           }
         }, Math.floor(Math.random() * 750 + 500))
       } catch (e) {
@@ -76,13 +78,14 @@ export default function Board({ board, setBoard, game }) {
     game.initializeBoard()
     const mockboardWithCells = game.board;
     setBoard([...mockboardWithCells])
-    if (firstMove === Constants._computer) {
-      setIsComputerMove(true)
-      setIsPlayerMove(false)
-    } else if (firstMove === Constants._user) {
-      setIsComputerMove(false)
-      setIsPlayerMove(true)
-    }
+    // if (playerTurn === Constants._computer) {
+    //   setIsComputerMove(true)
+    //   setIsPlayerMove(false)
+    // } else if (playerTurn === Constants._user) {
+    //   setIsComputerMove(false)
+    //   setIsPlayerMove(true)
+    // }
+    setPlayerTurn(Constants._computer)
 
   }
 
@@ -110,10 +113,12 @@ export default function Board({ board, setBoard, game }) {
                   board={board}
                   game={game}
                   setBoard={setBoard}
-                  setIsComputerMove={setIsComputerMove}
-                  setIsPlayerMove={setIsPlayerMove}
-                  isPlayerMove={isPlayerMove}
-                  isComputerMove={isComputerMove}
+                  playerTurn={playerTurn}
+                  // setIsComputerMove={setIsComputerMove}
+                  // setIsPlayerMove={setIsPlayerMove}
+                  // isPlayerMove={isPlayerMove}
+                  // isComputerMove={isComputerMove}
+                  setTitle={setTitle}
                   hasWinner={hasWinner}
                   setHasWinner={setHasWinner}
                   setPlayerTurn={setPlayerTurn}
